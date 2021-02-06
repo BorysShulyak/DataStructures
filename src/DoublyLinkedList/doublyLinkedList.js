@@ -13,7 +13,7 @@ class DoublyLinkedList {
         this.count = 0
     }
 
-    add(data) {
+    push(data) {
         const node = new Node(data)
         if(this.head === null) {
             this.head = node
@@ -25,6 +25,23 @@ class DoublyLinkedList {
         this.tail = node
         this.count ++
     }
+    pop() {
+        if (this.count === 0) return false
+
+        const poppedNode = this.tail
+        if(this.tail.prev !== null) {
+            const newTail = this.tail.prev
+            newTail.next = null
+            this.tail = newTail
+        }
+        else {
+            this.head = null
+            this.tail = null
+        }
+        this.count--
+        return poppedNode
+    }
+
     unshift(data) {
         const node = new Node(data)
         const tempHead = this.head
@@ -38,6 +55,23 @@ class DoublyLinkedList {
         }
         this.count ++
     }
+    shift() {
+        if(this.count === 0) return false
+
+        const shiftedNode = this.head
+        if(this.head.next !== null) {
+            const newHead = this.head.next
+            newHead.prev = null
+            this.head = newHead
+        }
+        else {
+            this.head = null
+            this.tail = null
+        }
+        this.count--
+        return shiftedNode
+    }
+
     remove(data) {
         let current = this.head
         while(current !== null){
