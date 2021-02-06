@@ -13,9 +13,13 @@ class DoublyLinkedList {
         this.count = 0
     }
 
+    isEmpty() {
+        return this.count === 0
+    }
+
     push(data) {
         const node = new Node(data)
-        if(this.head === null) {
+        if(this.isEmpty()) {
             this.head = node
         }
         else {
@@ -26,11 +30,11 @@ class DoublyLinkedList {
         this.count ++
     }
     pop() {
-        if (this.count === 0) return false
+        if (this.isEmpty()) return false
 
         const poppedNode = this.tail
-        if(this.tail.prev !== null) {
-            const newTail = this.tail.prev
+        const newTail = this.tail.prev
+        if(newTail !== null) {
             newTail.next = null
             this.tail = newTail
         }
@@ -45,13 +49,13 @@ class DoublyLinkedList {
     unshift(data) {
         const node = new Node(data)
         const tempHead = this.head
-        node.next = tempHead
         this.head = node
-        if(this.tail === null) {
-            this.tail = this.head
+        if(this.isEmpty()) {
+            this.tail = node
         }
         else {
             tempHead.prev = node
+            node.next = tempHead
         }
         this.count ++
     }
@@ -59,8 +63,8 @@ class DoublyLinkedList {
         if(this.count === 0) return false
 
         const shiftedNode = this.head
-        if(this.head.next !== null) {
-            const newHead = this.head.next
+        const newHead = this.head.next
+        if(newHead !== null) {
             newHead.prev = null
             this.head = newHead
         }
@@ -81,9 +85,15 @@ class DoublyLinkedList {
             current = current.next
         }
         if(current !== null) {
+            if(this.count === 1) {
+                this.head = null
+                this.tail = null
+            }
+            //if current == tail
             if(current.next === null){
                 current.prev.next = null
             }
+            //if current == head
             else if(current.prev === null){
                 current.next.prev = null
             }

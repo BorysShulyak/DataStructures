@@ -24,3 +24,11 @@ const deepEqual = (object1, object2) => {
 
     return true
 }
+
+const printStructure = (structure) => {
+    let elements = []
+    for (let item of structure) {
+        elements.push(item)
+    }
+    console.log(elements)
+}
