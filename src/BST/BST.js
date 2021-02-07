@@ -48,15 +48,64 @@ class BST {
 
         return visited
     }
+
+    preOrder() {
+        const visited = []
+
+        const traverse = node => {
+            visited.push(node.data)
+            if(node.left) traverse(node.left)
+            if(node.right) traverse(node.right)
+        }
+
+        traverse(this.root)
+        return visited
+    }
+
+    postOrder() {
+        const visited = []
+
+        const traverse = node => {
+            if (node.left) traverse(node.left)
+            if (node.right) traverse(node.right)
+            visited.push(node.data)
+        };
+
+        traverse(this.root)
+        return visited
+    }
+
+    inOrder() {
+        let visited = []
+
+        const traverse = node => {
+            if (node.left) traverse(node.left)
+            visited.push(node.data)
+            if (node.right) traverse(node.right)
+        };
+
+        traverse(this.root)
+        return visited
+    }
 }
 
 const tree = new BST(12)
-tree.insert(5)
-tree.insert(8)
-tree.insert(2)
-tree.insert(12)
-tree.insert(1)
+tree
+    .insert(20)
+    .insert(14)
+    .insert(57)
+    .insert(9)
+    .insert(19)
+    .insert(31)
+    .insert(62)
+    .insert(3)
+    .insert(11)
+    .insert(72)
 
-console.log(tree.BFS())
+
+console.log("BFS ",tree.BFS())
+console.log("preOrder ",tree.preOrder())
+console.log("postOrder ",tree.postOrder())
+console.log("inOrder ",tree.inOrder())
 
 
