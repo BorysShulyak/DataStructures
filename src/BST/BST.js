@@ -33,6 +33,21 @@ class BST {
             else insertSide('right')
         }
     }
+
+    BFS() {
+        const visited =[], queue = []
+
+        queue.push(this.root)
+        while (queue.length !== 0) {
+            let current = queue.shift()
+            visited.push(current.data)
+
+            if(current.left !== null) queue.push(current.left)
+            if(current.right !== null) queue.push(current.right)
+        }
+
+        return visited
+    }
 }
 
 const tree = new BST(12)
@@ -42,6 +57,6 @@ tree.insert(2)
 tree.insert(12)
 tree.insert(1)
 
-console.log(tree)
+console.log(tree.BFS())
 
 
